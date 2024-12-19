@@ -1,0 +1,24 @@
+{
+  "name": "meta-lamp-toxin",
+  "version": "1.0.0",
+  "description": "the practical task of the meta lamp",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack serve",
+    "build": "webpack"
+  },
+  "keywords": [
+    "meta-lamp"
+  ],
+  "author": "Bae Kabirov",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^5.97.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.2.0"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
+}
