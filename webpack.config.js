@@ -1,6 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   entry: {
@@ -38,15 +39,16 @@ module.exports = {
         use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
       },
       {
-        test: /\.(png|jpg|jpeg|gif)$/i,
-        type: "asset/resource",
-      },
-      {
-        test: /\.svg$/,
-        type: "asset/resource",
-        generator: {
-          filename: path.join("icons", "[name].[ext]"),
-        },
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              name: "[name].[ext]",
+              outputPath: "img/",
+            },
+          },
+        ],
       },
       {
         test: /\.(woff2?|eot|ttf|otf)$/i,
@@ -61,6 +63,25 @@ module.exports = {
     }),
     new MiniCssExtractPlugin({
       filename: "css/[name].css",
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: "src/**/*.{png,jpg,jpeg,gif,svg}",
+          to: (resourcePath) => {
+            console.log("resourcePath:", resourcePath);
+
+            const absoluteFilename = resourcePath.absoluteFilename;
+            const parentFolder = path.basename(path.dirname(absoluteFilename));
+            const grandparentFolder = path.basename(
+              path.dirname(path.dirname(absoluteFilename))
+            );
+
+            return `img/${grandparentFolder}/[name][ext]`;
+          },
+          noErrorOnMissing: true,
+        },
+      ],
     }),
   ],
   devServer: {
