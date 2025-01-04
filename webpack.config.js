@@ -1,18 +1,17 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const getAbsolutePath = (relativePath) => {
-  return path.resolve(__dirname, relativePath);
-};
 
 module.exports = {
   entry: {
     app: path.join(__dirname, "src", "index.js"),
+    style: path.join(__dirname, "src/scss", "style.scss"),
+    responsive: path.join(__dirname, "src/scss", "responsive.scss"),
   },
   output: {
     path: path.join(__dirname, "public"),
     clean: true,
-    filename: "[name].js",
+    filename: "js/[name].js",
   },
   resolve: {
     extensions: [".js", ".pug"],
@@ -26,18 +25,17 @@ module.exports = {
       },
       {
         test: /\.pug$/,
-        use: [
-          {
-            loader: "pug-loader",
-            options: {
-              pretty: true,
-            },
+        use: {
+          loader: "pug-loader",
+          options: {
+            pretty: true,
           },
-        ],
+        },
       },
       {
         test: /\.s[ac]ss$/i,
-        use: ["style-loader", "css-loader", "sass-loader"],
+        include: path.join(__dirname, "src/scss"),
+        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
       },
       {
         test: /\.(png|jpg|jpeg|gif)$/i,
@@ -62,7 +60,7 @@ module.exports = {
       filename: "index.html",
     }),
     new MiniCssExtractPlugin({
-      filename: "[name].css",
+      filename: "css/[name].css",
     }),
   ],
   devServer: {

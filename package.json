@@ -4,8 +4,10 @@
   "description": "the practical task of the meta lamp",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack serve --open --mode development ",
-    "build": "webpack --mode production"
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production",
+    "watch": "webpack --mode development --watch",
+    "start": "webpack-dev-server --mode development --open"
   },
   "keywords": [
     "meta-lamp"
@@ -24,7 +26,6 @@
     "pug-loader": "^2.4.0",
     "sass": "^1.83.0",
     "sass-loader": "^16.0.4",
-    "style-loader": "^4.0.0",
     "webpack": "^5.97.1",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.2.0"
