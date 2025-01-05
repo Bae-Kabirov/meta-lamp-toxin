@@ -5,9 +5,9 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   entry: {
-    app: path.join(__dirname, "src", "index.js"),
-    style: path.join(__dirname, "src/scss", "style.scss"),
-    responsive: path.join(__dirname, "src/scss", "responsive.scss"),
+    app: path.join(__dirname, "src/app", "index.js"),
+    style: path.join(__dirname, "src/app/scss", "style.scss"),
+    responsive: path.join(__dirname, "src/app/scss", "responsive.scss"),
   },
   output: {
     path: path.join(__dirname, "public"),
@@ -16,6 +16,11 @@ module.exports = {
   },
   resolve: {
     extensions: [".js", ".pug"],
+    alias: {
+      app: path.resolve(__dirname, "src/app/"),
+      widget: path.resolve(__dirname, "src/widget/"),
+      pages: path.resolve(__dirname, "src/pages/"),
+    },
   },
   module: {
     rules: [
@@ -34,8 +39,8 @@ module.exports = {
         },
       },
       {
-        test: /\.s[ac]ss$/i,
-        include: path.join(__dirname, "src/scss"),
+        test: /\.scss$/i,
+        include: path.join(__dirname, "src/app/scss"),
         use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
       },
       {
@@ -58,7 +63,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, "src", "main.pug"),
+      template: path.join(__dirname, "src/app", "main.pug"),
       filename: "index.html",
     }),
     new MiniCssExtractPlugin({
