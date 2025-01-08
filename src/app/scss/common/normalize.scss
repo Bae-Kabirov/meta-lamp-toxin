@@ -1,3 +1,4 @@
+// Сброс стилей
 * {
   padding: 0;
   margin: 0;
@@ -6,6 +7,7 @@
   text-decoration: none;
 }
 
+// Стили для элементов
 input,
 select,
 button {
@@ -13,6 +15,21 @@ button {
   outline: none;
 }
 
+ul,
+ol,
+li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+// Стили для body
 body {
+  font-family: 'Montserrat', sans-serif;
   min-width: 320px;
+}
+
+.container {
+  max-width: 1160px;
+  margin: 0 auto;
 }

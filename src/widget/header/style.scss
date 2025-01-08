@@ -1,5 +1,7 @@
 .header {
+
   &__inner {
+    height: 70px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -8,6 +10,12 @@
   &__logo {}
 
   &__list {
-    &-item {}
+    display: flex;
+    gap: 20px;
+
+
+    &-item {
+      color: var(--dark-shade-50);
+    }
   }
 }

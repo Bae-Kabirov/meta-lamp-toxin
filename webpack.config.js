@@ -2,6 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+const { styleText } = require("util");
 
 module.exports = {
   entry: {
@@ -20,6 +21,7 @@ module.exports = {
       app: path.resolve(__dirname, "src/app/"),
       widget: path.resolve(__dirname, "src/widget/"),
       pages: path.resolve(__dirname, "src/pages/"),
+      shared: path.resolve(__dirname, "src/shared/"),
     },
   },
   module: {
@@ -40,7 +42,6 @@ module.exports = {
       },
       {
         test: /\.scss$/i,
-        include: path.join(__dirname, "src/app/scss"),
         use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
       },
       {
@@ -86,9 +87,15 @@ module.exports = {
           },
           noErrorOnMissing: true,
         },
+        {
+          from: "src/shared/fonts",
+          to: "fonts",
+          noErrorOnMissing: true,
+        },
       ],
     }),
   ],
+
   devServer: {
     watchFiles: path.join(__dirname, "src"),
   },
